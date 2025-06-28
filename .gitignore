@@ -1,0 +1,10 @@
+# .gitignore (place in root of your project)
+.venv/
+__pycache__/
+*.pyc
+*.pyd
+*.log
+.DS_Store
+.env
+node_modules/
+*.sqlite3
