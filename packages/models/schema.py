@@ -1,22 +1,27 @@
+# packages/models/schema.py
 
-
+from pydantic import BaseModel, Field
 from typing import List, Optional
-from pydantic import BaseModel
 
 
-class SymptomInput(BaseModel):
-    symptoms: List[str]
+class ClassificationRequest(BaseModel):
+    text: str = Field(..., example="Patient shows signs of myocardial infarction.")
 
 
-class DiagnosisResponse(BaseModel):
-    diagnosis: str
-    confidence: Optional[float] = None
+class ClassificationResponse(BaseModel):
+    predicted_label: str
+    confidence: Optional[float] = None  # Optional if softmax is used
 
 
-class SpecialtyPrediction(BaseModel):
-    specialty: str
-    confidence: Optional[float] = None
+class EmbeddingRequest(BaseModel):
+    text: str = Field(..., example="The MRI results indicate possible glioblastoma.")
 
 
-class ErrorResponse(BaseModel):
-    detail: str
+class EmbeddingResponse(BaseModel):
+    embedding: List[float]
+
+
+class TrainRequest(BaseModel):
+    csv_path: str = Field(..., example="/data/cleaned_dataset.csv")
+    text_column: str = Field(default="abstract")
+    label_column: str = Field(default="category")
