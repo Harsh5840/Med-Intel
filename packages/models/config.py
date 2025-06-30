@@ -1,30 +1,30 @@
-# packages/models/config.py
-
 import os
 from pathlib import Path
+import torch
 
-# Base paths
+# === Base Paths ===
 BASE_DIR = Path(__file__).resolve().parent
-MODEL_DIR = BASE_DIR / "saved_models"
+SAVED_MODELS_DIR = BASE_DIR / "saved_models"
 
-# Model filenames
-CLASSIFICATION_MODEL_PATH = MODEL_DIR / "classification_model.pkl"
-EMBEDDING_MODEL_PATH = MODEL_DIR / "embedding_model.pkl"
+# === Saved Artifact Paths ===
+CLASSIFICATION_MODEL_PATH = SAVED_MODELS_DIR / "classification_model.pt"
+LABEL_ENCODER_PATH = SAVED_MODELS_DIR / "label_encoder.pkl"
+TOKENIZER_PATH = SAVED_MODELS_DIR  # HuggingFace tokenizer will load from directory
 
-# Training config
+# === Training Config ===
 RANDOM_SEED = 42
 BATCH_SIZE = 32
 EPOCHS = 10
 LEARNING_RATE = 2e-5
 MAX_SEQ_LENGTH = 512
 
-# Model names (for HuggingFace or local use)
+# === Model Config ===
 DEFAULT_EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 DEFAULT_CLASSIFICATION_MODEL = "distilbert-base-uncased"
 
-# Labels for classification (can be updated as needed)
+# === Classification Labels ===
 LABELS = ["cardiology", "oncology", "neurology", "radiology", "immunology"]
 NUM_LABELS = len(LABELS)
 
-# Environment
-DEVICE = "cuda" if os.environ.get("USE_CUDA", "1") == "1" else "cpu"
+# === Runtime Device ===
+DEVICE = torch.device("cuda" if os.environ.get("USE_CUDA", "1") == "1" and torch.cuda.is_available() else "cpu")

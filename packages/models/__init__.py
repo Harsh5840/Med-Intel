@@ -1,8 +1,6 @@
-# packages/models/__init__.py
-
 from .model import MedicalTextClassifier, load_embedding_model
 from .train import train_model
-from .inference import classify_text, embed_text, load_classification_model
+from .inference import classify_text, load_all
 from .preprocess import clean_text, prepare_training_data, encode_labels, decode_label
 from .utils import save_model, evaluate_model
 from .config import (
@@ -18,8 +16,7 @@ __all__ = [
     "load_embedding_model",
     "train_model",
     "classify_text",
-    "embed_text",
-    "load_classification_model",
+    "load_all",
     "clean_text",
     "prepare_training_data",
     "encode_labels",
