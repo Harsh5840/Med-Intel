@@ -23,8 +23,14 @@ DEFAULT_EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 DEFAULT_CLASSIFICATION_MODEL = "distilbert-base-uncased"
 
 # === Classification Labels ===
-LABELS = ["cardiology", "oncology", "neurology", "radiology", "immunology"]
+LABELS = [
+  "cardiology", "oncology", "neurology", "radiology", "immunology",
+  "gastroenterology", "dermatology", "psychiatry", "orthopedics",
+  "endocrinology", "nephrology", "hematology", "pulmonology",
+  "genetics", "ophthalmology", "urology"
+]
 NUM_LABELS = len(LABELS)
+
 
 # === Runtime Device ===
 DEVICE = torch.device("cuda" if os.environ.get("USE_CUDA", "1") == "1" and torch.cuda.is_available() else "cpu")
